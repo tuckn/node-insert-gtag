@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Home - node-fs-hospitality</title>
+    
+    <meta name="description" content="Extra methods for fs object. e.g. readAsText read a file with detecting automatically a character encoding. " />
+    
+        <meta name="keywords" content="fs, file, file system, read, write, text, character" />
+        <meta name="keyword" content="fs, file, file system, read, write, text, character" />
+    
+    
+    
+    <meta property="og:title" content="Node.js: fs-hospitality"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://cloud.githubusercontent.com/assets/447956/13398144/4dde7f36-defd-11e5-8909-1a9013302cb9.png"/>
+    <meta property="og:site_name" content="@tuckn/fs-hospitality"/>
+    <meta property="og:url" content="https://docs.tuckn.net/node-fs-hospitality"/>
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/tuckn/node-fs-hospitality" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Namespaces</h3><ul><li><a href="API.html">API</a><ul class='methods'><li data-type='method'><a href="API.html#.convertEOL">convertEOL</a></li><li data-type='method'><a href="API.html#.detectTextEncoding">detectTextEncoding</a></li><li data-type='method'><a href="API.html#.detectTextEol">detectTextEol</a></li><li data-type='method'><a href="API.html#.makeTmpPath">makeTmpPath</a></li><li data-type='method'><a href="API.html#.readAsText">readAsText</a></li><li data-type='method'><a href="API.html#.readAsTextSync">readAsTextSync</a></li><li data-type='method'><a href="API.html#.textDataToBuf">textDataToBuf</a></li><li data-type='method'><a href="API.html#.trimAllLines">trimAllLines</a></li><li data-type='method'><a href="API.html#.writeAsText">writeAsText</a></li><li data-type='method'><a href="API.html#.writeAsTextSync">writeAsTextSync</a></li><li data-type='method'><a href="API.html#.writeTmpFileSync">writeTmpFileSync</a></li></ul></li><li><a href="CLI.html">CLI</a><ul class='methods'><li data-type='method'><a href="CLI.html#.conv-text">conv-text</a></li><li data-type='method'><a href="CLI.html#.detect-text-spec">detect-text-spec</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+    <section class="package">
+        <h3> </h3>		
+    </section>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    <section class="readme usertext">
+        <article><h1 id="node.js%3A-fs-hospitality">Node.js: fs-hospitality</h1>
+<p>Extra methods for Node.js File System. e.g. <code>readAsText</code> read a file with detecting automatically a character encoding.</p>
+<h2 id="motivation">Motivation</h2>
+<p>I got tired of including <code>chardet</code>, <code>encoding-japanese</code>, and <code>iconv-lite</code> in most of my projects.<br>
+And also I wanted to learn <em>npm</em>, <em>TypeScript</em>, <em>GitHub</em>, etc and English.</p>
+<h2 id="installation">Installation</h2>
+<pre class="prettyprint source lang-console"><code>npm install @tuckn/fs-hospitality
+</code></pre>
+<h2 id="usage">Usage</h2>
+<h3 id="read-text-file">Read Text File</h3>
+<p><code>readAsText</code> and <code>readAsTextSync</code> can automatically recognize the encoding of a text file and read the contents as an enabled string.</p>
+<p>Asynchronous</p>
+<pre class="prettyprint source lang-js"><code>const fsh = require('@tuckn/fs-hospitality');
+
+fsh.readAsText('D:\\Test\\MyNoteSJIS.txt').then((textString) => {
+  console.log(textString);
+  // Returns String parsed with Shift_JIS
+});
+</code></pre>
+<p>Synchronous</p>
+<pre class="prettyprint source lang-js"><code>const fsh = require('@tuckn/fs-hospitality');
+
+const textString = fsh.readAsTextSync('D:\\Test\\NoteUtf16LE.txt');
+// Returns String parsed with UTF-16LE
+</code></pre>
+<h3 id="write-text-file">Write Text File</h3>
+<p><code>writeAsText</code> and <code>writeAsTextSync</code> can write strings a file with specifying the valid options for text file.</p>
+<p>Asynchronous</p>
+<pre class="prettyprint source lang-js"><code>const fsh = require('@tuckn/fs-hospitality');
+
+const vbsCode =
+  '  Dim str As String \n' + '  str = &quot;テスト&quot;  \n' + ' WScript.Echo str\n';
+
+const options = { trim: 'all', eol: 'crlf', encoding: 'SJIS' };
+
+fsh.writeAsText('D:\\Test\\sjis.vbs', vbsCode, options).then(() => {
+  console.log('Writing successful');
+});
+</code></pre>
+<p>Synchronous</p>
+<pre class="prettyprint source lang-js"><code>const fsh = require('@tuckn/fs-hospitality');
+
+const vbsCode =
+  '&lt;package>&lt;job>\n' +
+  '&lt;script language=&quot;JScript&quot;>WScript.Echo(&quot;テスト&quot;);&lt;/script>\n' +
+  '&lt;/job>&lt;/package>';
+
+const options = { eol: 'crlf', bom: true, encoding: 'UTF-8' };
+
+fsh.writeAsTextSync('D:\\Test\\utf8bom.wsf', vbsCode, {}).then(() => {
+  console.log('Writing successful');
+});
+</code></pre>
+<h3 id="others">Others</h3>
+<p>Make a temporary path.</p>
+<pre class="prettyprint source lang-js"><code>const fsh = require('@tuckn/fs-hospitality');
+
+const tmpPath1 = fsh.makeTmpPath();
+// Returns: 'C:\Users\YourName\AppData\Local\Temp\7c70ceef-28f6-4ae8-b4ef-5e5d459ef007'
+
+// If necessary, make sure that the file does not exist.
+const fs = require('fs');
+if (fs.existsSync(tmpPath1)) throw new Error('Oops! Already existing');
+</code></pre>
+<p>Write a temporary file and get the path.</p>
+<pre class="prettyprint source lang-js"><code>const fsh = require('@tuckn/fs-hospitality');
+
+const tmpStr = 'The Temporary Message';
+const tmpPath = fsh.writeTmpFileSync(tmpStr);
+// Returns: 'C:\Users\YourName\AppData\Local\Temp\7c70ceef-28f6-4ae8-b4ef-5e5d459ef007'
+
+const fs = require('fs');
+const readData = fs.readFileSync(tmpPath, { encoding: 'utf8' });
+console.log(tmpStr === readData); // true
+</code></pre>
+<h2 id="cli">CLI</h2>
+<h3 id="detect-text-spec">detect-text-spec</h3>
+<pre class="prettyprint source lang-console"><code>$ fs-hospitality detect-text-spec --help
+
+Usage: fs-hospitality detect-text-spec [options] &lt;filepath>
+
+Detecting a text specification.
+
+Options:
+  -V, --version      output the version number
+  -T, --type &lt;name>  &quot;all&quot; | &quot;encoding&quot; | &quot;eol&quot;
+  -h, --help         display help for command
+</code></pre>
+<p>Below are examples on Windows.</p>
+<pre class="prettyprint source lang-console"><code>> fs-hospitality detect-text-spec &quot;D:\Test\src.wsf&quot; --type &quot;encoding&quot;
+SJIS
+> fs-hospitality detect-text-spec &quot;D:\Test\src.wsf&quot; --type &quot;eol&quot;
+crlf
+</code></pre>
+<h3 id="conv-text">conv-text</h3>
+<pre class="prettyprint source lang-console"><code>$ fs-hospitality conv-text --help
+
+Usage: fs-hospitality conv-text [options] &lt;filepath> [destPath]
+
+Converting a text encoding.
+
+Options:
+  -V, --version          output the version number
+  -T, --trim &lt;type>      &quot;all&quot; | &quot;start&quot; | &quot;end&quot;
+  -E, --eol &lt;type>       &quot;lf&quot; | &quot;cr&quot; | &quot;crlf&quot; or &quot;unix&quot; | &quot;mac&quot; | &quot;dos&quot;
+  -B, --bom              Add BOM. Only UTFx encoding
+  -e, --encoding &lt;name>  &quot;UTF-16BE&quot;, &quot;Shift_JIS&quot;, ... &quot;Default: &quot;utf8&quot; (default: &quot;utf8&quot;)
+  -h, --help             display help for command
+</code></pre>
+<p>Below are examples on Windows.</p>
+<pre class="prettyprint source lang-console"><code>> fs-hospitality conv-text &quot;D:\Test\src.wsf&quot; --trim &quot;all&quot; --eol &quot;dos&quot; --bom
+</code></pre>
+<h2 id="api">API</h2>
+<p>All specifications are written <a href="https://docs.tuckn.net/node-fs-hospitality">here</a>.</p>
+<h2 id="license">License</h2>
+<p>MIT</p>
+<p>Copyright (c) 2020 <a href="https://github.com/tuckn">Tuckn</a></p></article>
+    </section>
+
+
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

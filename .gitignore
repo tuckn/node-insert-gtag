@@ -102,3 +102,21 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# MSOffice Cache
+~$*
+*.tmp
+
+# FreeFileSync
+*.ffs_db
+*.ffs_lock
+
+docs/
