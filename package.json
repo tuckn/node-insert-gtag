@@ -1,7 +1,7 @@
 {
   "name": "@tuckn/insert-gtag",
   "description": "Node.js CLI to insert a Google Analytics code (gtag.js) into HTML files",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Tuckn <tuckn333+github@gmail.com>",
   "private": false,
   "license": "MIT",
