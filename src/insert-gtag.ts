@@ -22,7 +22,7 @@ const _errLoc = (fn: Function) => `\n    at ${fn.name} (${__filename})`;
  *
  * @private
  * @param {string} dirPath - A directory path
- * @param {object} [options] - Options
+ * @param {object} [options] - Optional parameters
  * @param {string} [options.matchedRegExp] - RegExp pattern of extensions of file to be inserted. Default. "\\.html?$"
  * @param {string} [options.ignoredRegExp] - RegExp pattern of file to be exclude. Ex. "[_\\-.]cache\\d+"
  * @returns {Promise<string[]>} - Returns a Array of full-paths.
@@ -63,7 +63,7 @@ export function makeAnalyticsCode(
   trackingId: string | string[],
   indentNum = 4,
 ): string {
-  if (!trackingId) {
+  if (_.isEmpty(trackingId)) {
     throw new Error(`${ARG_ERR}trackingId is empty.${_errLoc(Function)}`);
   }
 
@@ -103,7 +103,7 @@ export async function insertGtagCode(
   trackingId: string | string[],
   options = {},
 ): Promise<any> {
-  if (!trackingId) {
+  if (_.isEmpty(trackingId)) {
     throw new Error(`${ARG_ERR}trackingId is empty.${_errLoc(Function)}`);
   }
 
@@ -227,7 +227,7 @@ export async function insertGTagManagerCode(
  * @memberof API
  * @param {string} dirPath - A directory path
  * @param {string} trackingId - A tracking ID
- * @param {object} [options]
+ * @param {object} [options] - Optional parameters
  * @param {string} [options.matchedRegExp] - RegExp pattern of extensions of file to be inserted. Default. "\\.html?$"
  * @param {string} [options.ignoredRegExp] - RegExp pattern of file to be exclude. Ex. "[_\\-.]cache\\d+"
  */

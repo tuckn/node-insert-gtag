@@ -41,6 +41,8 @@
     "prebuild": "rimraf ./dist",
     "build:common": "tsc",
     "build": "run-p build:*",
+    "prepkg": "tsc --module commonjs --resolveJsonModule ./scripts/release.ts",
+    "pkg": "node ./scripts/release.js",
     "predocs": "npm run build || rimraf ./docs",
     "docs:common": "jsdoc --configure ./jsdoc.json",
     "cp-docs-css": "cpx ./scripts/jsdoc.css ./docs/styles/",
@@ -51,7 +53,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npx lint-staged"
+      "pre-commit": "echo @FIXME \"npx lint-staged\" fixes all .js!"
     }
   },
   "lint-staged": {
@@ -59,20 +61,22 @@
     "*.{json,css,md,yml,yaml}": "prettier --write"
   },
   "dependencies": {
-    "@tuckn/fs-hospitality": "^1.3.0",
+    "@tuckn/fs-hospitality": "^1.4.0",
     "commander": "^5.1.0",
-    "jquery": "^3.5.0",
+    "jquery": "^3.5.1",
     "jsdom": "^16.2.2",
     "lodash": "4.17.15"
   },
   "devDependencies": {
+    "@types/adm-zip": "^0.4.33",
     "@types/diff": "^4.0.2",
     "@types/jest": "^25.2.1",
-    "@types/jquery": "^3.3.36",
+    "@types/jquery": "^3.3.38",
     "@types/jsdom": "^16.2.1",
     "@types/lodash": "4.14.150",
     "@typescript-eslint/eslint-plugin": "2.30.0",
     "@typescript-eslint/parser": "2.30.0",
+    "adm-zip": "^0.4.14",
     "cpx": "1.5.0",
     "diff": "^4.0.2",
     "docdash": "1.2.0",
@@ -80,18 +84,19 @@
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-import": "2.20.2",
-    "eslint-plugin-jsdoc": "^24.0.0",
+    "eslint-plugin-jsdoc": "^24.0.6",
     "eslint-plugin-prettier": "3.1.3",
     "eslint-plugin-simple-import-sort": "5.0.3",
     "fs-extra": "^9.0.0",
     "husky": "4.2.5",
-    "jest": "^25.5.3",
+    "jest": "^25.5.4",
     "jsdoc": "3.6.4",
     "lint-staged": "10.2.2",
     "npm-run-all": "4.1.5",
+    "pkg": "^4.4.8",
     "prettier": "2.0.5",
     "rimraf": "^3.0.2",
-    "ts-jest": "^25.4.0",
+    "ts-jest": "^25.5.0",
     "typescript": "^3.8.3"
   }
 }

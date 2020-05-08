@@ -17,9 +17,9 @@ import { insertGtagCode, insertGTagManagerCode } from '../lib/index';
  * @memberof CLI
  * @example
 Usage: insert-gtag analytics [options] <dirPath> <trackingId> [additionalId...]
-
+ 
 Insert Google Analytics code (gtag.js) in html files
-
+ 
 Options:
   -V, --version                output the version number
   -M, --matched-reg-exp <exp>  RegExp pattern of extensions of file to be inserted. Default.
@@ -27,13 +27,13 @@ Options:
   -I, --ignored-reg-exp <exp>  RegExp pattern of file to be exclude. Ex. "[_\-.]cache\d+"
   -N, --indents <number>       Number of indenting white spaces. Default: 4
   -h, --help                   display help for command
-
+ 
 // Ex1.
-$ npx insert-gtag analytics "D:\MyHtmlDir" "UA-XXXXXX-Y"
+> insert-gtag analytics "D:\MyHtmlDir" "UA-XXXXXX-Y"
 done
-
+ 
 // Ex2.
-$ npx insert-gtag analytics "D:\HtmlDir2" --indents 2 "UA-XXXXXX-Y" "AW-XXXXXXXXXX"
+> insert-gtag analytics "D:\HtmlDir2" --indents 2 "UA-XXXXXX-Y" "AW-XXXXXXXXXX"
 done
  */
 program
@@ -64,9 +64,9 @@ program
  * @memberof CLI
  * @example
 Usage: insert-gtag tag-manager [options] <dirPath> <gtmId>
-
+ 
 Insert Google Tag Manager code in html files
-
+ 
 Options:
   -V, --version                output the version number
   -M, --matched-reg-exp <exp>  RegExp pattern of extensions of file to be inserted. Default.
@@ -74,9 +74,9 @@ Options:
   -I, --ignored-reg-exp <exp>  RegExp pattern of file to be exclude. Ex. "[_\-.]cache\d+"
   -N, --indents <number>       Number of indenting white spaces. Default: 4
   -h, --help                   display help for command
-
+ 
 // Ex.
-$ npx insert-gtag tag-manager "D:\MyHtmlDir" "YOUR_GTM_ID"
+> insert-gtag tag-manager "D:\MyHtmlDir" "YOUR_GTM_ID"
 done
  */
 program
