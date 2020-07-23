@@ -8,6 +8,8 @@ Node.js CLI to insert a Google Analytics (gtag.js) or Tag Manager code into your
 npm install -g @tuckn/insert-gtag
 ```
 
+or download a [released binary file](https://github.com/tuckn/node-insert-gtag/releases).
+
 ## Usage
 
 ## Adding Google Analytics Code

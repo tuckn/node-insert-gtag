@@ -5,6 +5,8 @@ import * as pkg from 'pkg';
 
 import { version } from '../package.json';
 
+const pjName = 'insert-gtag';
+
 /**
  *
  */
@@ -13,13 +15,13 @@ async function release() {
   const dirNpmBin = path.resolve(__dirname, '..', 'dist', 'bin');
 
   const pathNpmBin = path.join(dirNpmBin, 'index.js');
-  const pathPjNameJs = path.join(dirNpmBin, 'insert-gtag.js');
+  const pathPjNameJs = path.join(dirNpmBin, `${pjName}.js`);
   await fse.copyFile(pathNpmBin, pathPjNameJs);
 
   // Create the directory for packaging
   const dirAssets = path.resolve(__dirname, '..', 'assets');
   const dirAssetsBin = path.join(dirAssets, 'bin');
-  const dirExe = path.join(dirAssetsBin, 'insert-gtag');
+  const dirExe = path.join(dirAssetsBin, pjName);
 
   await fse.remove(dirAssetsBin); // Clear
 
@@ -28,26 +30,26 @@ async function release() {
     {
       srcPath: pathPjNameJs,
       target: 'node12-linux-x64',
-      output: path.join(dirExe, 'insert-gtag'),
-      zipPath: path.join(dirAssetsBin, `insert-gtag_v${version}_linux-x64.zip`),
+      output: path.join(dirExe, pjName),
+      zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_linux-x64.zip`),
     },
     {
       srcPath: pathPjNameJs,
       target: 'node12-macos-x64',
-      output: path.join(dirExe, 'insert-gtag'),
-      zipPath: path.join(dirAssetsBin, `insert-gtag_v${version}_macos-x64.zip`),
+      output: path.join(dirExe, pjName),
+      zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_macos-x64.zip`),
     },
     {
       srcPath: pathPjNameJs,
       target: 'node12-win-x86',
-      output: path.join(dirExe, 'insert-gtag.exe'),
-      zipPath: path.join(dirAssetsBin, `insert-gtag_v${version}_win-x86.zip`),
+      output: path.join(dirExe, `${pjName}.exe`),
+      zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_win-x86.zip`),
     },
     {
       srcPath: pathPjNameJs,
       target: 'node12-win-x64',
-      output: path.join(dirExe, 'insert-gtag.exe'),
-      zipPath: path.join(dirAssetsBin, `insert-gtag_v${version}_win-x64.zip`),
+      output: path.join(dirExe, `${pjName}.exe`),
+      zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_win-x64.zip`),
     },
   ];
 

@@ -45,8 +45,8 @@
     "pkg": "node ./scripts/release.js",
     "predocs": "npm run build || rimraf ./docs",
     "docs:common": "jsdoc --configure ./jsdoc.json",
-    "cp-docs-css": "cpx ./scripts/jsdoc.css ./docs/styles/",
-    "cp-docs-img": "cpx ./assets/img ./docs/",
+    "cp-docs-css": "cpy ./assets/styles/jsdoc.css ./docs/styles/",
+    "cp-docs-img": "cpy ./assets/img/**/* ./docs/img/",
     "postdocs": "run-p cp-docs-*",
     "docs": "run-s docs:*",
     "prepublishOnly": "npm run build"
@@ -65,7 +65,7 @@
     "commander": "^5.1.0",
     "jquery": "^3.5.1",
     "jsdom": "^16.2.2",
-    "lodash": "4.17.15"
+    "lodash": "^4.17.19"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.4.33",
@@ -77,7 +77,7 @@
     "@typescript-eslint/eslint-plugin": "2.30.0",
     "@typescript-eslint/parser": "2.30.0",
     "adm-zip": "^0.4.14",
-    "cpx": "1.5.0",
+    "cpy-cli": "^3.1.1",
     "diff": "^4.0.2",
     "docdash": "1.2.0",
     "eslint": "6.8.0",
