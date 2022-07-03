@@ -17,7 +17,7 @@
         "--config", "${workspaceFolder}/jest.config.js",
         "--runInBand",
         "--no-cache",
-        "--testNamePattern", "insertGTagManagerCode"
+        "--testNamePattern", "makeAnalyticsCode"
       ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"

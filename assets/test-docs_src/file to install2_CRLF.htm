@@ -1,0 +1,2619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>API - node-fs-hospitality</title>
+
+    <meta name="description" content="Extra methods for fs object. e.g. readAsText read a file with detecting automatically a character encoding. " />
+
+        <meta name="keywords" content="fs, file, file system, read, write, text, character" />
+        <meta name="keyword" content="fs, file, file system, read, write, text, character" />
+
+
+
+    <meta property="og:title" content="Node.js: fs-hospitality"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://cloud.githubusercontent.com/assets/447956/13398144/4dde7f36-defd-11e5-8909-1a9013302cb9.png"/>
+    <meta property="og:site_name" content="@tuckn/fs-hospitality"/>
+    <meta property="og:url" content="https://docs.tuckn.net/node-fs-hospitality"/>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+
+    <input type="text" id="nav-search" placeholder="Search" />
+
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/tuckn/node-fs-hospitality" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Namespaces</h3><ul><li><a href="API.html">API</a><ul class='methods'><li data-type='method'><a href="API.html#.convertEOL">convertEOL</a></li><li data-type='method'><a href="API.html#.detectTextEncoding">detectTextEncoding</a></li><li data-type='method'><a href="API.html#.detectTextEol">detectTextEol</a></li><li data-type='method'><a href="API.html#.makeTmpPath">makeTmpPath</a></li><li data-type='method'><a href="API.html#.readAsText">readAsText</a></li><li data-type='method'><a href="API.html#.readAsTextSync">readAsTextSync</a></li><li data-type='method'><a href="API.html#.textDataToBuf">textDataToBuf</a></li><li data-type='method'><a href="API.html#.trimAllLines">trimAllLines</a></li><li data-type='method'><a href="API.html#.writeAsText">writeAsText</a></li><li data-type='method'><a href="API.html#.writeAsTextSync">writeAsTextSync</a></li><li data-type='method'><a href="API.html#.writeTmpFileSync">writeTmpFileSync</a></li></ul></li><li><a href="CLI.html">CLI</a><ul class='methods'><li data-type='method'><a href="CLI.html#.conv-text">conv-text</a></li><li data-type='method'><a href="CLI.html#.detect-text-spec">detect-text-spec</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+
+    <h1 class="page-title">API</h1>
+
+
+
+
+
+
+
+<section>
+
+<header>
+
+        <h2>
+        API
+        </h2>
+
+
+</header>
+
+<article>
+
+        <div class="container-overview">
+
+
+
+<dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fs-hospitality.js.html">fs-hospitality.js</a>, <a href="fs-hospitality.js.html#line12">line 12</a>
+    </li></ul></dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <h3 class="subsection-title">Methods</h3>
+
+
+
+
+
+
+    <h4 class="name" id=".convertEOL"><span class="type-signature">(static) </span>convertEOL<span class="signature">(strData, eol)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+
+
+
+
+
+<dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fs-hospitality.js.html">fs-hospitality.js</a>, <a href="fs-hospitality.js.html#line234">line 234</a>
+    </li></ul></dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Replaces the EOL (End of Line) character of a String.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+
+    <pre class="prettyprint"><code>const { convertEOL } = require('@tuckn/fs-hospitality');
+
+  const textCrLf = 'foo\r\n'
+    + 'bar\r\n'
+    + '\r\n'
+    + 'baz';
+
+  const textLf = convertEOL(textCrLf, 'lf');
+  // Returns:
+  // 'foo\n'
+  //   + 'bar\n
+  //   + '\n
+  //   + 'baz'</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+
+        <th>Type</th>
+
+
+
+
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+        <tr>
+
+                <td class="name"><code>strData</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+
+
+
+            <td class="description last"><p>A string to be replaced</p></td>
+        </tr>
+
+
+
+        <tr>
+
+                <td class="name"><code>eol</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+
+
+
+            <td class="description last"><p>&quot;(lf|unix|\n)&quot; | &quot;(cr|mac|\r)&quot; | &quot;(crlf|dos|\r\n)&quot;</p></td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+
+<div class="param-desc">
+    <ul>
+<li>A replaced string</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+    <h4 class="name" id=".detectTextEncoding"><span class="type-signature">(static) </span>detectTextEncoding<span class="signature">(textData)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+
+
+
+
+
+<dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fs-hospitality.js.html">fs-hospitality.js</a>, <a href="fs-hospitality.js.html#line63">line 63</a>
+    </li></ul></dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Detects the character encoding of a Buffer or a file-path. A binary file would be detected as UTF32. See <a href="https://github.com/runk/node-chardet#supported-encodings">chardet Supported Encodings</a>. If chardet detect windows-1252, Re-detect with <a href="https://github.com/polygonplanet/encoding.js#available-encodings">encoding.js</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+
+    <pre class="prettyprint"><code>const { detectTextEncoding } = require('@tuckn/fs-hospitality');
+
+  const encoding = detectTextEncoding('D:\\Test\\SjisNote.txt');
+  // Returns: 'SJIS'
+
+  const encoding2 = detectTextEncoding('D:\\Test\\Utf16LeNote.doc');
+  // Returns: 'UTF-16LE'
+
+  const encoding3 = detectTextEncoding('D:\\Test\\image.png');
+  // Returns: 'UTF32'</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+
+        <th>Type</th>
+
+
+
+
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+        <tr>
+
+                <td class="name"><code>textData</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">Buffer</span>
+|
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+
+
+
+            <td class="description last"><p>A Buffer or a file-path</p></td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+
+<div class="param-desc">
+    <ul>
+<li>A name of character encoding. A binary file would be detected as UTF32.</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+    <h4 class="name" id=".detectTextEol"><span class="type-signature">(static) </span>detectTextEol<span class="signature">(textData)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+
+
+
+
+
+<dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fs-hospitality.js.html">fs-hospitality.js</a>, <a href="fs-hospitality.js.html#line90">line 90</a>
+    </li></ul></dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Detects the EOL (End of Line) character of a Buffer or a file-path.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+
+    <pre class="prettyprint"><code>const { detectTextEol } = require('@tuckn/fs-hospitality');
+
+  const eol = detectTextEol('D:\\Test\\SjisCRLF.txt'); // file-path
+  // Returns: 'crlf'
+
+  const buf = 'D:\\Test\\Utf8.doc'
+  const eol2 = detectTextEol(buf); // Buffer
+  // Returns: 'lf'</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+
+        <th>Type</th>
+
+
+
+
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+        <tr>
+
+                <td class="name"><code>textData</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">Buffer</span>
+|
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+
+
+
+            <td class="description last"><p>Buffer of file-path</p></td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+
+<div class="param-desc">
+    <ul>
+<li>&quot;crlf&quot; | &quot;cr&quot; | &quot;lf&quot; | &quot;&quot;</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+    <h4 class="name" id=".makeTmpPath"><span class="type-signature">(static) </span>makeTmpPath<span class="signature">(baseDir<span class="signature-attributes">opt</span>, prefix<span class="signature-attributes">opt</span>, postfix<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+
+
+
+
+
+<dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fs-hospitality.js.html">fs-hospitality.js</a>, <a href="fs-hospitality.js.html#line274">line 274</a>
+    </li></ul></dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Create a temporary path on the <a href="https://nodejs.org/api/os.html#os_os_tmpdir">Node.js os.tmpdir</a></p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+
+    <pre class="prettyprint"><code>const { makeTmpPath } = require('@tuckn/fs-hospitality');
+
+  const tmpPath1 = makeTmpPath();
+  // Returns: 'C:\Users\YourName\AppData\Local\Temp\7c70ceef-28f6-4ae8-b4ef-5e5d459ef007'
+
+  // If necessary, make sure that the file does not exist.
+  const fs = require('fs');
+  if (fs.existsSync(tmpPath1)) throw new Error('Oops!');
+
+  const tmpPath2 = makeTmpPath('.');
+  // Returns: 'D:\test\2a5d35c8-7214-4ec7-a41d-a371b19273e7'
+
+  const tmpPath3 = makeTmpPath('\\\\server\\public');
+  // Returns: '\\server\public\01fa6ce7-e6d3-4b50-bdcd-19679c49bef2'
+
+  const tmpPath4 = makeTmpPath('R:', 'tmp_', '.log');
+  // Returns: 'R:\tmp_14493643-792d-4b0d-b2af-c74531db625e.log'</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+
+        <th>Type</th>
+
+
+        <th>Attributes</th>
+
+
+
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+        <tr>
+
+                <td class="name"><code>baseDir</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+                    &lt;optional><br>
+
+
+
+
+
+                </td>
+
+
+
+
+            <td class="description last"><p>The default is os.tmpdir</p></td>
+        </tr>
+
+
+
+        <tr>
+
+                <td class="name"><code>prefix</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+                    &lt;optional><br>
+
+
+
+
+
+                </td>
+
+
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+
+        <tr>
+
+                <td class="name"><code>postfix</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+                    &lt;optional><br>
+
+
+
+
+
+                </td>
+
+
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+
+<div class="param-desc">
+    <ul>
+<li>A temporary path</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+    <h4 class="name" id=".readAsText"><span class="type-signature">(static) </span>readAsText<span class="signature">(textFile, encoding<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
+
+
+
+
+
+
+<dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fs-hospitality.js.html">fs-hospitality.js</a>, <a href="fs-hospitality.js.html#line135">line 135</a>
+    </li></ul></dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Reads a Buffer or a file-path as text and encodes it into a String.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+
+    <pre class="prettyprint"><code>const { readAsText } = require('@tuckn/fs-hospitality');
+
+  // Ex.1 From a file-path
+  const fileSjis = 'D:\\Test\\MyNoteSJIS.txt'
+
+  readAsText(fileSjis).then((textString) => {
+    console.log(textString);
+    // Returns String parsed with Shift_JIS
+  });
+
+  // Ex.2 From a Buffer
+  const fileUtf16LE = 'D:\\Test\\Utf16LE.log'
+
+  fs.readFile(fileUtf16LE, async (err, data) => {
+    const textString = await readAsText(data);
+    console.log(textString);
+    // Returns String parsed with UTF-16LE
+  });</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+
+        <th>Type</th>
+
+
+        <th>Attributes</th>
+
+
+
+        <th>Default</th>
+
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+        <tr>
+
+                <td class="name"><code>textFile</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">Buffer</span>
+|
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+
+
+
+
+                </td>
+
+
+
+                <td class="default">
+
+                </td>
+
+
+            <td class="description last"><p>Buffer or file-path</p></td>
+        </tr>
+
+
+
+        <tr>
+
+                <td class="name"><code>encoding</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+                    &lt;optional><br>
+
+
+
+
+
+                </td>
+
+
+
+                <td class="default">
+
+                    <code>''</code>
+
+                </td>
+
+
+            <td class="description last"><p>If empty, auto-detecting</p></td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+
+<div class="param-desc">
+    <ul>
+<li>{ resolve:string, reject:Error }</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+<span class="param-type">Promise.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+    <h4 class="name" id=".readAsTextSync"><span class="type-signature">(static) </span>readAsTextSync<span class="signature">(textFile, encoding<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+
+
+
+
+
+<dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fs-hospitality.js.html">fs-hospitality.js</a>, <a href="fs-hospitality.js.html#line191">line 191</a>
+    </li></ul></dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>The asynchronous version of this API: readAsText().</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+
+    <pre class="prettyprint"><code>const { readAsTextSync } = require('@tuckn/fs-hospitality');
+
+  // Ex.1 From the file-path
+  const textString = readAsTextSync('D:\\Test\\MyNoteSJIS.txt');
+  // Returns String parsed with Shift_JIS
+
+  // Ex.2 From the Buffer
+  const buf = fs.readFile('D:\\Test\\Utf16LE.log');
+  const textString2 = readAsTextSync(buf);
+  // Returns String parsed with UTF-16LE</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+
+        <th>Type</th>
+
+
+        <th>Attributes</th>
+
+
+
+        <th>Default</th>
+
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+        <tr>
+
+                <td class="name"><code>textFile</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">Buffer</span>
+|
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+
+
+
+
+                </td>
+
+
+
+                <td class="default">
+
+                </td>
+
+
+            <td class="description last"><p>A Buffer or a file-path</p></td>
+        </tr>
+
+
+
+        <tr>
+
+                <td class="name"><code>encoding</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+                    &lt;optional><br>
+
+
+
+
+
+                </td>
+
+
+
+                <td class="default">
+
+                    <code>''</code>
+
+                </td>
+
+
+            <td class="description last"><p>If empty, auto-detecting</p></td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+
+<div class="param-desc">
+    <ul>
+<li>The entire contents as String</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+    <h4 class="name" id=".textDataToBuf"><span class="type-signature">(static) </span>textDataToBuf<span class="signature">(textData)</span><span class="type-signature"> &rarr; {Buffer}</span></h4>
+
+
+
+
+
+
+<dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fs-hospitality.js.html">fs-hospitality.js</a>, <a href="fs-hospitality.js.html#line36">line 36</a>
+    </li></ul></dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Reads the entire contents of a file. If a type of the param is Buffer, direct return it.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+
+    <pre class="prettyprint"><code>const { textDataToBuf } = require('@tuckn/fs-hospitality');
+
+  const buf = textDataToBuf('D:\\Test\\SjisNote.txt'); // file-path
+  // Returns: fs.readFileSync('D:\\Test\\SjisNote.txt')
+
+  const buf2 = textDataToBuf(buf); // Buffer
+  // Returns: buf</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+
+        <th>Type</th>
+
+
+
+
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+        <tr>
+
+                <td class="name"><code>textData</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">Buffer</span>
+|
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+
+
+
+            <td class="description last"><p>A Buffer or a file-path</p></td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+
+<div class="param-desc">
+    <ul>
+<li>The entire contents</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+<span class="param-type">Buffer</span>
+
+
+    </dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+    <h4 class="name" id=".trimAllLines"><span class="type-signature">(static) </span>trimAllLines<span class="signature">(strLines, option<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+
+
+
+
+
+<dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fs-hospitality.js.html">fs-hospitality.js</a>, <a href="fs-hospitality.js.html#line337">line 337</a>
+    </li></ul></dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Trims a string at every each line</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+
+    <pre class="prettyprint"><code>const { trimAllLines } = require('@tuckn/fs-hospitality');
+
+  const str = '  foo  \n'
+    + '  bar  \n'
+    + ' baz  ';
+
+  const trimmedStr1 = trimAllLines(str);
+  // Returns: 'foo\n'
+  //   + 'bar\n'
+  //   + 'baz';
+
+  const trimmedStr2 = trimAllLines(str, 'end');
+  // Returns: '  foo\n'
+  //   + '  bar\n'
+  //   + ' baz';</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+
+        <th>Type</th>
+
+
+        <th>Attributes</th>
+
+
+
+        <th>Default</th>
+
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+        <tr>
+
+                <td class="name"><code>strLines</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+
+
+
+
+                </td>
+
+
+
+                <td class="default">
+
+                </td>
+
+
+            <td class="description last"><p>A string to be trimmed</p></td>
+        </tr>
+
+
+
+        <tr>
+
+                <td class="name"><code>option</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+                    &lt;optional><br>
+
+
+
+
+
+                </td>
+
+
+
+                <td class="default">
+
+                    <code>'all'</code>
+
+                </td>
+
+
+            <td class="description last"><p>'all' | 'start' | 'end';</p></td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+
+<div class="param-desc">
+    <ul>
+<li>A trimmed string</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+    <h4 class="name" id=".writeAsText"><span class="type-signature">(static) </span>writeAsText<span class="signature">(destPath, strData<span class="signature-attributes">opt</span>, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
+
+
+
+
+
+
+<dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fs-hospitality.js.html">fs-hospitality.js</a>, <a href="fs-hospitality.js.html#line387">line 387</a>
+    </li></ul></dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Write a String to the file as text. Also can specify an encoding, an EOL, BOM and trimming every line.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+
+    <pre class="prettyprint"><code>const { writeAsText } = require('@tuckn/fs-hospitality');
+  const vbsFile = 'D:\\Test\\utf8bom.vbs';
+  const strData = 'Dim str As String  \n  str = "hoge"\n  WScript.Echo str';
+
+  writeAsText(vbsFile, strData, {
+    trim: 'all',
+    eol: 'crlf',
+    bom: true,
+    encoding: 'UTF-8',
+  }).then(() => {
+    console.log('Writing successful');
+  });</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+
+        <th>Type</th>
+
+
+        <th>Attributes</th>
+
+
+
+        <th>Default</th>
+
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+        <tr>
+
+                <td class="name"><code>destPath</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+
+
+
+
+                </td>
+
+
+
+                <td class="default">
+
+                </td>
+
+
+            <td class="description last"><p>A destination file-path</p></td>
+        </tr>
+
+
+
+        <tr>
+
+                <td class="name"><code>strData</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+                    &lt;optional><br>
+
+
+
+
+
+                </td>
+
+
+
+                <td class="default">
+
+                    <code>''</code>
+
+                </td>
+
+
+            <td class="description last"><p>A string of data to write</p></td>
+        </tr>
+
+
+
+        <tr>
+
+                <td class="name"><code>options</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">PrewriteAsTextOptions</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+                    &lt;optional><br>
+
+
+
+
+
+                </td>
+
+
+
+                <td class="default">
+
+                </td>
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+
+<div class="param-desc">
+    <ul>
+<li>{ resolve:undefined, reject: Error }</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+<span class="param-type">Promise.&lt;void></span>
+
+
+    </dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+    <h4 class="name" id=".writeAsTextSync"><span class="type-signature">(static) </span>writeAsTextSync<span class="signature">(destPath, strData<span class="signature-attributes">opt</span>, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {void}</span></h4>
+
+
+
+
+
+
+<dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fs-hospitality.js.html">fs-hospitality.js</a>, <a href="fs-hospitality.js.html#line431">line 431</a>
+    </li></ul></dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>The asynchronous version of this API: writeAsText().</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+
+    <pre class="prettyprint"><code>const { writeAsText } = require('@tuckn/fs-hospitality');
+  const vbsFile = 'D:\\Test\\utf8bom.vbs';
+  const strData = 'Dim str As String  \n  str = "hoge"\n  WScript.Echo str';
+
+  writeAsText(vbsFile, strData, {
+    trim: 'all',
+    eol: 'crlf',
+    bom: true,
+    encoding: 'UTF-8',
+  }).then(() => {
+    console.log('Writing successful');
+  });</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+
+        <th>Type</th>
+
+
+        <th>Attributes</th>
+
+
+
+        <th>Default</th>
+
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+        <tr>
+
+                <td class="name"><code>destPath</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+
+
+
+
+                </td>
+
+
+
+                <td class="default">
+
+                </td>
+
+
+            <td class="description last"><p>A destination file-path</p></td>
+        </tr>
+
+
+
+        <tr>
+
+                <td class="name"><code>strData</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">string</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+                    &lt;optional><br>
+
+
+
+
+
+                </td>
+
+
+
+                <td class="default">
+
+                    <code>''</code>
+
+                </td>
+
+
+            <td class="description last"><p>A string of data to write</p></td>
+        </tr>
+
+
+
+        <tr>
+
+                <td class="name"><code>options</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">PrewriteAsTextOptions</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+                    &lt;optional><br>
+
+
+
+
+
+                </td>
+
+
+
+                <td class="default">
+
+                </td>
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+    <h4 class="name" id=".writeTmpFileSync"><span class="type-signature">(static) </span>writeTmpFileSync<span class="signature">(data, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+
+
+
+
+
+<dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fs-hospitality.js.html">fs-hospitality.js</a>, <a href="fs-hospitality.js.html#line299">line 299</a>
+    </li></ul></dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Write the data to a new temporary path, and Return the path.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+
+    <pre class="prettyprint"><code>const { writeTmpFileSync } = require('@tuckn/fs-hospitality');
+
+  const tmpStr = 'The Temporary Message';
+  const tmpPath = writeTmpFileSync(tmpStr);
+  // Returns: 'C:\Users\YourName\AppData\Local\Temp\7c70ceef-28f6-4ae8-b4ef-5e5d459ef007'
+
+  const fs = require('fs');
+  const readData = fs.readFileSync(tmpPath, { encoding: 'utf8' });
+  console.log(tmpStr === readData); // true</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+
+        <th>Type</th>
+
+
+        <th>Attributes</th>
+
+
+
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+        <tr>
+
+                <td class="name"><code>data</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">Buffer</span>
+|
+
+<span class="param-type">string</span>
+|
+
+<span class="param-type">TypedArray</span>
+|
+
+<span class="param-type">DataView</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+
+
+
+
+                </td>
+
+
+
+
+            <td class="description last"><p>A data to write</p></td>
+        </tr>
+
+
+
+        <tr>
+
+                <td class="name"><code>options</code></td>
+
+
+            <td class="type">
+
+
+<span class="param-type">object</span>
+
+
+
+            </td>
+
+
+                <td class="attributes">
+
+                    &lt;optional><br>
+
+
+
+
+
+                </td>
+
+
+
+
+            <td class="description last"><p>See <a href="https://nodejs.org/api/fs.html#fs_fs_writefilesync_file_data_options">Node.js fs.writeFileSync</a></p></td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+
+<div class="param-desc">
+    <ul>
+<li>A temporary file path</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+</section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

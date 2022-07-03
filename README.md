@@ -1,6 +1,6 @@
 # Node.js: insert-gtag
 
-Node.js CLI to insert a Google Analytics (gtag.js) or Tag Manager code into your HTML files.
+Node.js CLI to insert Google Tag Manager and Google Analytics code into your HTML files.
 
 ## Installation
 

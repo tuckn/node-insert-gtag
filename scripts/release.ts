@@ -29,25 +29,25 @@ async function release() {
   const releases = [
     {
       srcPath: pathPjNameJs,
-      target: 'node12-linux-x64',
+      target: 'node14-linux-x64',
       output: path.join(dirExe, pjName),
       zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_linux-x64.zip`),
     },
     {
       srcPath: pathPjNameJs,
-      target: 'node12-macos-x64',
+      target: 'node14-macos-x64',
       output: path.join(dirExe, pjName),
       zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_macos-x64.zip`),
     },
+    // {
+    //   srcPath: pathPjNameJs,
+    //   target: 'node14-win-x86',
+    //   output: path.join(dirExe, `${pjName}.exe`),
+    //   zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_win-x86.zip`),
+    // },
     {
       srcPath: pathPjNameJs,
-      target: 'node12-win-x86',
-      output: path.join(dirExe, `${pjName}.exe`),
-      zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_win-x86.zip`),
-    },
-    {
-      srcPath: pathPjNameJs,
-      target: 'node12-win-x64',
+      target: 'node14-win-x64',
       output: path.join(dirExe, `${pjName}.exe`),
       zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_win-x64.zip`),
     },

@@ -41,6 +41,7 @@ var fse = require("fs-extra");
 var path = require("path");
 var pkg = require("pkg");
 var package_json_1 = require("../package.json");
+var pjName = 'insert-gtag';
 /**
  *
  */
@@ -52,40 +53,40 @@ function release() {
                 case 0:
                     dirNpmBin = path.resolve(__dirname, '..', 'dist', 'bin');
                     pathNpmBin = path.join(dirNpmBin, 'index.js');
-                    pathPjNameJs = path.join(dirNpmBin, 'insert-gtag.js');
+                    pathPjNameJs = path.join(dirNpmBin, "".concat(pjName, ".js"));
                     return [4 /*yield*/, fse.copyFile(pathNpmBin, pathPjNameJs)];
                 case 1:
                     _a.sent();
                     dirAssets = path.resolve(__dirname, '..', 'assets');
                     dirAssetsBin = path.join(dirAssets, 'bin');
-                    dirExe = path.join(dirAssetsBin, 'insert-gtag');
+                    dirExe = path.join(dirAssetsBin, pjName);
                     return [4 /*yield*/, fse.remove(dirAssetsBin)];
                 case 2:
                     _a.sent(); // Clear
                     releases = [
                         {
                             srcPath: pathPjNameJs,
-                            target: 'node12-linux-x64',
-                            output: path.join(dirExe, 'insert-gtag'),
-                            zipPath: path.join(dirAssetsBin, "insert-gtag_v" + package_json_1.version + "_linux-x64.zip")
+                            target: 'node14-linux-x64',
+                            output: path.join(dirExe, pjName),
+                            zipPath: path.join(dirAssetsBin, "".concat(pjName, "_v").concat(package_json_1.version, "_linux-x64.zip"))
                         },
                         {
                             srcPath: pathPjNameJs,
-                            target: 'node12-macos-x64',
-                            output: path.join(dirExe, 'insert-gtag'),
-                            zipPath: path.join(dirAssetsBin, "insert-gtag_v" + package_json_1.version + "_macos-x64.zip")
+                            target: 'node14-macos-x64',
+                            output: path.join(dirExe, pjName),
+                            zipPath: path.join(dirAssetsBin, "".concat(pjName, "_v").concat(package_json_1.version, "_macos-x64.zip"))
                         },
+                        // {
+                        //   srcPath: pathPjNameJs,
+                        //   target: 'node14-win-x86',
+                        //   output: path.join(dirExe, `${pjName}.exe`),
+                        //   zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_win-x86.zip`),
+                        // },
                         {
                             srcPath: pathPjNameJs,
-                            target: 'node12-win-x86',
-                            output: path.join(dirExe, 'insert-gtag.exe'),
-                            zipPath: path.join(dirAssetsBin, "insert-gtag_v" + package_json_1.version + "_win-x86.zip")
-                        },
-                        {
-                            srcPath: pathPjNameJs,
-                            target: 'node12-win-x64',
-                            output: path.join(dirExe, 'insert-gtag.exe'),
-                            zipPath: path.join(dirAssetsBin, "insert-gtag_v" + package_json_1.version + "_win-x64.zip")
+                            target: 'node14-win-x64',
+                            output: path.join(dirExe, "".concat(pjName, ".exe")),
+                            zipPath: path.join(dirAssetsBin, "".concat(pjName, "_v").concat(package_json_1.version, "_win-x64.zip"))
                         },
                     ];
                     _i = 0, releases_1 = releases;

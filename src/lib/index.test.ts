@@ -5,57 +5,147 @@ import * as path from 'path';
 
 import * as insGtag from './index';
 
-// Hack to make iconv load the encodings module, otherwise jest crashes. Compare
-// https://github.com/sidorares/node-mysql2/issues/489
-require('@tuckn/fs-hospitality/node_modules/iconv-lite').encodingExists('foo');
-
 const dirAssets = path.resolve(__dirname, '../../assets');
-const dirGtags = path.join(dirAssets, 'gtags');
-const analyticsJs = path.join(dirGtags, 'gtag.js');
-const tagManagerJs = path.join(dirGtags, 'gtag-manager.js');
-const tagManagerJsNo = path.join(dirGtags, 'gtag-manager_noscript.js');
 
 const inspectDiff = (diffs: jsdiff.Change[], indents: number): void => {
+  /*
+   * @NOTE example of jsdiff (5.1.0) result
+gtag-manager.js before after
+[
+  {
+    count: 1,
+    value: "\n",
+  },
+  {
+    count: 4,
+    added: true,
+    removed: undefined,
+    value: "    ",
+  },
+  {
+    count: 28,
+    value: "<!-- Google Tag Manager -->\n",
+  },
+  {
+    count: 4,
+    added: true,
+    removed: undefined,
+    value: "    ",
+  },
+  {
+    count: 67,
+    value: "<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\n",
+  },
+  {
+    count: 4,
+    added: true,
+    removed: undefined,
+    value: "    ",
+  },
+  {
+    count: 74,
+    value: "new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\n",
+  },
+  {
+    count: 4,
+    added: true,
+    removed: undefined,
+    value: "    ",
+  },
+  {
+    count: 70,
+    value: "j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\n",
+  },
+  {
+    count: 4,
+    added: true,
+    removed: undefined,
+    value: "    ",
+  },
+  {
+    count: 83,
+    value: "'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\n",
+  },
+  {
+    count: 4,
+    added: true,
+    removed: undefined,
+    value: "    ",
+  },
+  {
+    count: 45,
+    value: "})(window,document,'script','dataLayer','GTM-",
+  },
+  {
+    count: 7,
+    added: undefined,
+    removed: true,
+    value: "AAAAAAA",
+  },
+  {
+    count: 7,
+    added: true,
+    removed: undefined,
+    value: "BBBBBBB",
+  },
+  {
+    count: 13,
+    value: "');</script>\n",
+  },
+  {
+    count: 4,
+    added: true,
+    removed: undefined,
+    value: "    ",
+  },
+  {
+    count: 32,
+    value: "<!-- End Google Tag Manager -->\n",
+  },
+]
+   */
   diffs.forEach((part, i) => {
+    if (!part.added && !part.removed) return; // The some part
+
     if (part.added) {
-      expect(part.value).toMatch(/^[\r\n B]+$/);
-
-      if (/^B+$/.test(part.value)) {
-        expect(diffs[i - 1].value).toMatch(/^A+$/);
-
-        const numsY = part.value.length;
-        expect(diffs[i - 1].value).toHaveLength(numsY);
-      } else {
-        expect(part.value).toMatch(/^[\r\n ]+$/);
-        const spaces = part.value.replace(/[\r\n]/, '');
-        expect(spaces).toHaveLength(indents);
+      // @NOTE /\s/ include '\r' and '\n'
+      if (/^[ ]+$/.test(part.value)) {
+        expect(part.value).toHaveLength(indents); // Check indent num
+        return;
       }
     }
 
-    if (part.removed) {
-      expect(part.value).toMatch(/^A+$/);
-    }
+    expect(part.value).toBe(0); // error
   });
 };
 
 describe('insert-gtag', () => {
   test('makeAnalyticsCode', () => {
     const trackingId = 'UA-BBBBBBBB-B';
-    const analyticsSrc = fsh.readAsTextSync(analyticsJs);
+    const expectedCode = `
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=${trackingId}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '${trackingId}');
+</script>
+`;
 
     let analyticsCode: string;
     let diffs: jsdiff.Change[];
 
     analyticsCode = insGtag.makeAnalyticsCode(trackingId);
-    diffs = jsdiff.diffChars(analyticsSrc, analyticsCode);
+    diffs = jsdiff.diffChars(expectedCode, analyticsCode);
     inspectDiff(diffs, 4);
 
     analyticsCode = insGtag.makeAnalyticsCode(trackingId, 0);
-    diffs = jsdiff.diffChars(analyticsSrc, analyticsCode);
+    diffs = jsdiff.diffChars(expectedCode, analyticsCode);
     inspectDiff(diffs, 0);
 
     analyticsCode = insGtag.makeAnalyticsCode(trackingId, 2);
-    diffs = jsdiff.diffChars(analyticsSrc, analyticsCode);
+    diffs = jsdiff.diffChars(expectedCode, analyticsCode);
     inspectDiff(diffs, 2);
 
     expect(() => insGtag.makeAnalyticsCode('')).toThrow();
@@ -63,7 +153,15 @@ describe('insert-gtag', () => {
 
   test('makeTagManagerCode', () => {
     const gtmId = 'GTM-BBBBBBB';
-    const tagMangerSrc = fsh.readAsTextSync(tagManagerJs);
+    const tagMangerSrc = `
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${gtmId}');</script>
+<!-- End Google Tag Manager -->
+`;
 
     let analyticsCode: string;
     let diffs: jsdiff.Change[];
@@ -85,7 +183,12 @@ describe('insert-gtag', () => {
 
   test('makeTagManagerCodeNoScript', () => {
     const gtmId = 'GTM-BBBBBBB';
-    const tagMangerNoSrc = fsh.readAsTextSync(tagManagerJsNo);
+    const tagMangerNoSrc = `
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+`;
 
     let analyticsCode: string;
     let diffs: jsdiff.Change[];
@@ -130,7 +233,7 @@ test-docs_src
       file to install2.htm
    */
 
-  test('insertGtagCode', async (done) => {
+  test('insertGtagCode', async () => {
     const dirTest = fsh.makeTmpPath('', 'test-insertGtagCode');
     const trackingId = 'UA-BBBBBBBB-B';
     const codeToInsert = insGtag.makeAnalyticsCode(trackingId);
@@ -153,20 +256,23 @@ test-docs_src
         if (/to exclude/i.test(relPath)) {
           expect(srcCode === testCode).toBeTruthy();
         } else {
-          expect(testCode.indexOf(`<head>${codeToInsert}`)).not.toBe(-1);
-          expect(
-            srcCode === testCode.replace(`<head>${codeToInsert}`, '<head>'),
-          ).toBeTruthy();
+          // Check the inserted position
+          expect(testCode).toMatch(/<head>\s*<!-- Global site tag \(gtag\.js\) /i);
+          if (/CRLF\.html?$/.test(relPath)) {
+            // To check the code insertion is completed for CRLF.
+            expect(testCode).toContain(codeToInsert.replace(/\n/g, '\r\n'));
+          } else {
+            // To check the code insertion is completed.
+            expect(testCode).toContain(codeToInsert);
+          }
         }
       }),
     );
 
     await fse.remove(dirTest);
-
-    done();
   });
 
-  test('insertGTagManagerCode', async (done) => {
+  test('insertGTagManagerCode', async () => {
     const dirTest = fsh.makeTmpPath('', 'test-insertGTagManagerCode');
     const gtmId = 'GTM-BBBBBBB';
     const codeToInsert = insGtag.makeTagManagerCode(gtmId);
@@ -190,20 +296,23 @@ test-docs_src
         if (/to exclude/i.test(relPath)) {
           expect(srcCode === testCode).toBeTruthy();
         } else {
-          expect(testCode.indexOf(`<head>${codeToInsert}`)).not.toBe(-1);
-          expect(testCode.indexOf(`<body>${codeToInsertNoJs}`)).not.toBe(-1);
-          expect(
-            srcCode ===
-              testCode
-                .replace(`<head>${codeToInsert}`, '<head>')
-                .replace(`<body>${codeToInsertNoJs}`, '<body>'),
-          ).toBeTruthy();
+          // Check the inserted position
+          expect(testCode).toMatch(/<head>\s*<!-- Google Tag Manager -->/i);
+          expect(testCode).toMatch(/<body>\s*<!-- Google Tag Manager \(noscript\) -->/i);
+
+          if (/CRLF\.html?$/.test(relPath)) {
+            // To check the code insertion is completed for CRLF.
+            expect(testCode).toContain(codeToInsert.replace(/\n/g, '\r\n'));
+            expect(testCode).toContain(codeToInsertNoJs.replace(/\n/g, '\r\n'));
+          } else {
+            // To check the code insertion is completed.
+            expect(testCode).toContain(codeToInsert);
+            expect(testCode).toContain(codeToInsertNoJs);
+          }
         }
       }),
     );
 
     await fse.remove(dirTest);
-
-    done();
   });
 });

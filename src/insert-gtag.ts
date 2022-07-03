@@ -68,6 +68,7 @@ export function makeAnalyticsCode(
   }
 
   const indent = _.repeat(' ', indentNum);
+  // @NOTE The line break code is LF (\n)
   let code = `
 ${indent}<!-- Global site tag (gtag.js) - Google Analytics -->
 ${indent}<script async src="https://www.googletagmanager.com/gtag/js?id=${trackingId}"></script>
@@ -79,12 +80,11 @@ ${indent}  gtag('js', new Date());
 
   const trackingIds = _.isArray(trackingId) ? trackingId : [trackingId];
   trackingIds.forEach((id) => {
-    code += `
-${indent}  gtag('config', '${id}');`;
+    code += `${indent}  gtag('config', '${id}');
+`;
   });
 
-  code += `
-${indent}</script>
+  code += `${indent}</script>
 `;
 
   return code;
@@ -142,6 +142,7 @@ export function makeTagManagerCode(gtmId: string, indentNum = 4): string {
 
   const indent = _.repeat(' ', indentNum);
 
+  // @NOTE The line break code is LF (\n)
   return `
 ${indent}<!-- Google Tag Manager -->
 ${indent}<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -171,6 +172,7 @@ export function makeTagManagerCodeNoScript(
 
   const indent = _.repeat(' ', indentNum);
 
+  // @NOTE The line break code is LF (\n)
   return `
 ${indent}<!-- Google Tag Manager (noscript) -->
 ${indent}<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}"

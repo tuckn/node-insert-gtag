@@ -43,7 +43,7 @@
     },
     "meta": {
       "title": "node-insert-gtag",
-      "description": "Node.js CLI to insert a Google Analytics code (gtag.js) into your HTML files",
+      "description": "Node.js CLI to insert Google Tag Manager and Google Analytics code into your HTML files.",
       "keyword": "cli, html, gtag.js, tracking-code, analytics, google"
     },
     "search": true,
