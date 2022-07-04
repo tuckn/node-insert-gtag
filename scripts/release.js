@@ -65,28 +65,32 @@ function release() {
                     _a.sent(); // Clear
                     releases = [
                         {
+                            target: 'latest-linux-x64',
                             srcPath: pathPjNameJs,
-                            target: 'node14-linux-x64',
                             output: path.join(dirExe, pjName),
                             zipPath: path.join(dirAssetsBin, "".concat(pjName, "_v").concat(package_json_1.version, "_linux-x64.zip"))
                         },
                         {
+                            target: 'latest-macos-x64',
                             srcPath: pathPjNameJs,
-                            target: 'node14-macos-x64',
                             output: path.join(dirExe, pjName),
                             zipPath: path.join(dirAssetsBin, "".concat(pjName, "_v").concat(package_json_1.version, "_macos-x64.zip"))
                         },
-                        // {
-                        //   srcPath: pathPjNameJs,
-                        //   target: 'node14-win-x86',
-                        //   output: path.join(dirExe, `${pjName}.exe`),
-                        //   zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_win-x86.zip`),
-                        // },
                         {
+                            target: 'latest-win-x64',
                             srcPath: pathPjNameJs,
-                            target: 'node14-win-x64',
                             output: path.join(dirExe, "".concat(pjName, ".exe")),
                             zipPath: path.join(dirAssetsBin, "".concat(pjName, "_v").concat(package_json_1.version, "_win-x64.zip"))
+                        },
+                        {
+                            /*
+                             * @NOTICE With pkg v5.7.0, conversion to win-x86 fails.
+                             * The solution is using pkg 4.4.0. it works.
+                             */
+                            target: 'latest-win-x86',
+                            srcPath: pathPjNameJs,
+                            output: path.join(dirExe, "".concat(pjName, ".exe")),
+                            zipPath: path.join(dirAssetsBin, "".concat(pjName, "_v").concat(package_json_1.version, "_win-x86.zip"))
                         },
                     ];
                     _i = 0, releases_1 = releases;
@@ -97,7 +101,7 @@ function release() {
                     return [4 /*yield*/, fse.ensureDir(dirExe)];
                 case 4:
                     _a.sent();
-                    return [4 /*yield*/, pkg.exec([o.srcPath, '--target', o.target, '--output', o.output])];
+                    return [4 /*yield*/, pkg.exec(['--target', o.target, '--output', o.output, o.srcPath])];
                 case 5:
                     _a.sent();
                     zip = new AdmZip();

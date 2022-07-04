@@ -1,12 +1,12 @@
 {
   "name": "@tuckn/insert-gtag",
   "description": "Node.js CLI to insert Google Tag Manager and Google Analytics code into your HTML files.",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": "Tuckn <tuckn333@gmail.com>",
-	"funding": {
-		"type": "github",
-		"url": "https://github.com/sponsors/tuckn"
-	},
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/tuckn"
+  },
   "private": false,
   "license": "MIT",
   "homepage": "https://docs.tuckn.net/node-insert-gtag",
@@ -35,7 +35,7 @@
   },
   "scripts": {
     "ncu:checkUpdate": "npx npm-check-updates",
-    "ncu:upgrade": "npx npm-check-updates --upgrade",
+    "ncu:upgrade": "npx npm-check-updates --upgrade && npm install",
     "lint:eslint": "eslint --ext .js,.ts ./src/",
     "lint:prettier": "prettier -l \"**/*.{json,css,md,yml,yaml}\"",
     "lint:type": "tsc --noEmit",
@@ -68,7 +68,7 @@
     "*.{json,css,md,yml,yaml}": "prettier --write"
   },
   "dependencies": {
-    "@tuckn/fs-hospitality": "^1.4.2",
+    "@tuckn/fs-hospitality": "^1.4.3",
     "commander": "^9.3.0",
     "jquery": "^3.6.0",
     "jsdom": "^20.0.0",
@@ -81,13 +81,13 @@
     "@types/fs-extra": "^9.0.13",
     "@types/jest": "^28.1.4",
     "@types/lodash": "4.14.182",
-    "@typescript-eslint/eslint-plugin": "5.30.3",
-    "@typescript-eslint/parser": "5.30.3",
+    "@typescript-eslint/eslint-plugin": "5.30.4",
+    "@typescript-eslint/parser": "5.30.4",
     "adm-zip": "^0.5.9",
     "cpy-cli": "^4.1.0",
     "diff": "^5.1.0",
     "docdash": "1.2.0",
-    "eslint": "8.18.0",
+    "eslint": "8.19.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
@@ -100,7 +100,7 @@
     "jsdoc": "^3.6.10",
     "lint-staged": "13.0.3",
     "npm-run-all": "4.1.5",
-    "pkg": "^5.7.0",
+    "pkg": "^4.4.0",
     "prettier": "2.7.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^28.0.5",
