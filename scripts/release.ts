@@ -28,35 +28,39 @@ async function release() {
   // Package the bin-JS into an executable
   const releases = [
     {
+      target: 'latest-linux-x64',
       srcPath: pathPjNameJs,
-      target: 'node14-linux-x64',
       output: path.join(dirExe, pjName),
       zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_linux-x64.zip`),
     },
     {
+      target: 'latest-macos-x64',
       srcPath: pathPjNameJs,
-      target: 'node14-macos-x64',
       output: path.join(dirExe, pjName),
       zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_macos-x64.zip`),
     },
-    // {
-    //   srcPath: pathPjNameJs,
-    //   target: 'node14-win-x86',
-    //   output: path.join(dirExe, `${pjName}.exe`),
-    //   zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_win-x86.zip`),
-    // },
     {
+      target: 'latest-win-x64',
       srcPath: pathPjNameJs,
-      target: 'node14-win-x64',
       output: path.join(dirExe, `${pjName}.exe`),
       zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_win-x64.zip`),
+    },
+    {
+      /*
+       * @NOTICE With pkg v5.7.0, conversion to win-x86 fails.
+       * The solution is using pkg 4.4.0. it works.
+       */
+      target: 'latest-win-x86',
+      srcPath: pathPjNameJs,
+      output: path.join(dirExe, `${pjName}.exe`),
+      zipPath: path.join(dirAssetsBin, `${pjName}_v${version}_win-x86.zip`),
     },
   ];
 
   // Async funcs in sequential
   for (const o of releases) {
     await fse.ensureDir(dirExe);
-    await pkg.exec([o.srcPath, '--target', o.target, '--output', o.output]);
+    await pkg.exec(['--target', o.target, '--output', o.output, o.srcPath]);
 
     // Zipping the directory
     const zip = new AdmZip();
